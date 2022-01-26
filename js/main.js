@@ -21,7 +21,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 function createWall(){
-
+	
 	const wall = new THREE.Mesh( 
 		new THREE.BoxGeometry(100, 20.30, 4),  
 		new THREE.MeshLambertMaterial({color: 0x343434}) 
@@ -124,7 +124,7 @@ function createRoom(){
 
 	const bottomWall = createWall();
 	bottomWall.position.set(0, 3.6, 31)
-	room.add(bottomWall	);
+	room.add(bottomWall);
 
 	const floor = new THREE.Mesh( 
 		new THREE.PlaneGeometry( 100, 56, 1, 1 ), 
@@ -192,7 +192,7 @@ function createCouchLeft(){
 	couchBackLeft.position.set(-8, -3, -0.2);
 
 	const couchLeft = createCouchSides();
-	couchLeft.position.set(-12, -5, 5);
+	couchLeft.position.set(-11.4, -6, 4.6);
 	couchLeftGrp.add(couchLeft);
 
 	const cushionLeft = createCushion();
@@ -280,7 +280,7 @@ function createTVtable(){
 
 	const table = new THREE.Mesh(
 		new THREE.BoxBufferGeometry(20, 2, 8),
-		new THREE.MeshLambertMaterial({color:0xffffff})
+		new THREE.MeshLambertMaterial({color: 0xffffff})
 	);	
 	table.position.set(-26, -4, 46.6);
 	tvTbl.add(table);
@@ -336,11 +336,11 @@ function createTblArea(){
 	const tblArea = new THREE.Group();
 
 	const roundChairTop = createRoundChair();
-	roundChairTop.position.set(32, 0, 15);
+	roundChairTop.position.set(36, 0, 17);
 	tblArea.add(roundChairTop);
 
 	const roundChairBtm = createRoundChair();
-	roundChairBtm.position.set(39, 0, 33);
+	roundChairBtm.position.set(33, 0, 33);
 	tblArea.add(roundChairBtm);
 
 	const tblAreaDesk = new THREE.Mesh(
@@ -404,7 +404,46 @@ function createLamp(){
 
 const lamp = createLamp();
 lamp.position.set(-12, 0, -21);
-// lamp.rotation.y = 3
 scene.add(lamp);
+
+function createPlant(){
+
+	const plant = new THREE.Group();
+
+	const pot = new THREE.Mesh(
+		new THREE.CylinderGeometry(2, 1.5, 1.95, 30),
+		new THREE.MeshToonMaterial({color: 0x664033})
+	);
+	plant.add(pot);
+
+	const bush = new THREE.Mesh(
+		new THREE.SphereGeometry( 2, 32, 16 ),
+		new THREE.MeshBasicMaterial( { color: 0x518C4F	 } )
+	);
+	bush.position.y = 2 
+	plant.add(bush);
+
+	return plant;
+}
+
+const plant1 = createPlant();
+plant1.position.set(42, 0, 26.2);
+scene.add(plant1);
+
+const plant2 = createPlant();
+plant2.position.set(42, 0, -20);
+scene.add(plant2);
+
+function createframe(){
+	const frame = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(0.2,3,3.4),
+		new THREE.MeshLambertMaterial({color: 0xffffff})
+	)
+	
+	frame.position.set(40, 10, 3)
+	return frame;
+}
+
+scene.add(createframe());
 
 renderer.render(scene, camera);
