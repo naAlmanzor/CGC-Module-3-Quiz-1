@@ -104,6 +104,18 @@ function createWallRight(){
 	return wallExtenstion;
 }
 
+function createWallDetail(){
+	const details = new THREE.Group();
+
+	const detail = new THREE.Mesh(
+		new THREE.BoxBufferGeometry( 10, 20, 2),
+		new THREE.MeshLambertMaterial( {color: 0xD29C71} )
+	)
+	details.add(detail);
+
+	return details;
+}
+
 function createRoom(){
 
 	const room = new THREE.Group();
@@ -125,6 +137,40 @@ function createRoom(){
 	const bottomWall = createWall();
 	bottomWall.position.set(0, 3.6, 31)
 	room.add(bottomWall);
+
+	const details = new THREE.Group();
+
+	const detail1 = createWallDetail();
+	detail1.position.set(2, 4, 0)
+	details.add(detail1);
+
+	const detail2 = createWallDetail();
+	detail2.position.set(16, 4, 0)
+	details.add(detail2);
+
+	const detail3 = createWallDetail();
+	detail3.position.set(30, 4, 0)
+	details.add(detail3);
+	
+	details.position.z = 28
+	room.add(details);
+
+	const doorGrp = new THREE.Group();
+	const door = new THREE.Mesh(
+		new THREE.BoxBufferGeometry( 8, 13, 2),
+		new THREE.MeshLambertMaterial( {color: 0xD29C71} )
+	)
+	doorGrp.add(door);
+
+	const knob = new THREE.Mesh(
+		new THREE.BoxBufferGeometry( 1, 1, 2),
+		new THREE.MeshLambertMaterial( {color: 0x343434} )
+	)
+	knob.position.set(2, -1, 0.4);
+	doorGrp.add(knob);
+
+	room.add(doorGrp);
+	doorGrp.position.set(15, 0, -23.9)
 
 	const floor = new THREE.Mesh( 
 		new THREE.PlaneGeometry( 100, 56, 1, 1 ), 
