@@ -235,4 +235,37 @@ function createTVarea(){
 const tvArea = createTVarea();
 scene.add(tvArea);
 
+function createRoundChair(){
+	const roundChair = new THREE.Mesh(
+		new THREE.CylinderGeometry( 3, 3, 2, 64 ),
+		new THREE.MeshLambertMaterial( {color: 0xffffff} )
+	);
+
+	return roundChair;
+}
+
+function createTblArea(){
+	const tblArea = new THREE.Group();
+
+	const roundChairTop = createRoundChair();
+	roundChairTop.position.set(32, 0, 15);
+	tblArea.add(roundChairTop);
+
+	const roundChairBtm = createRoundChair();
+	roundChairBtm.position.set(39, 0, 33);
+	tblArea.add(roundChairBtm);
+
+	const tblAreaDesk = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(20, 2.5, 9),
+		new THREE.MeshLambertMaterial({color:0xffffff})
+	);	
+	tblAreaDesk.position.set(35, -4, 25);
+	tblArea.add(tblAreaDesk);
+
+	return tblArea;
+};
+
+const tblArea = createTblArea();
+scene.add(tblArea);
+
 renderer.render(scene, camera);
