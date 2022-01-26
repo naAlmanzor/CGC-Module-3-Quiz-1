@@ -357,4 +357,54 @@ const tblArea = createTblArea();
 tblArea.position.set(0, 0, -21)
 scene.add(tblArea);
 
+function createLampStand (){
+
+	const lampStand = new THREE.Group();
+
+	const lampStandCylinder = new THREE.Mesh(
+		new THREE.CylinderGeometry( 1, 2, 2, 30 ),
+		new THREE.MeshBasicMaterial( {color: 0x1A1E2A} )
+	);
+	lampStandCylinder.position.y = -6;
+	lampStand.add(lampStandCylinder)
+
+	const lampStick = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(0.2, 6),
+		new THREE.MeshLambertMaterial({color:0x1A1E2A})
+	);
+	lampStick.position.y = -2;
+	lampStand.add(lampStick)
+
+	return lampStand;
+}
+
+function createLampCover(){
+
+	const geometry = new THREE.CylinderGeometry( 1.5, 2, 4, 30 );
+	const material = new THREE.MeshToonMaterial( {color: 0xF8E972} );
+	const lampCover = new THREE.Mesh( geometry, material );
+	lampCover.position.y = 4;
+	return lampCover;
+};
+
+function createLamp(){
+	const lamp = new THREE.Group();
+
+	const lampStand = createLampStand();
+	lamp.add(lampStand);
+
+	const lampCover = createLampCover();
+	lamp.add(lampCover);
+
+	const light = new THREE.PointLight( 0xff0000, 2, 50 );
+	lamp.add(light);
+
+	return lamp;
+}
+
+const lamp = createLamp();
+lamp.position.set(-12, 0, -21);
+// lamp.rotation.y = 3
+scene.add(lamp);
+
 renderer.render(scene, camera);
