@@ -66,4 +66,173 @@ function createRoom(){
 const room = createRoom();
 scene.add(room); 
 
+function createCouchSides(){
+	
+	const couchSide = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(3, 6, 6),
+		new THREE.MeshLambertMaterial({ color: 0x8C8C8C})
+	);
+
+	return couchSide;
+}
+
+function createCushion(){
+	
+	const cushion = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(5.6, 5, 8),
+		new THREE.MeshLambertMaterial({ color: 0x343434})
+	);
+
+	return cushion;
+}
+
+function createCouchBetween(){
+	const couchBtwnGrp = new THREE.Group();
+
+	const couchBtwnBack = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(10, 10, 4),
+		new THREE.MeshLambertMaterial({ color: 0x8C8C8C})
+	);
+	couchBtwnGrp.add(couchBtwnBack);
+
+	const cushionBtwn = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(10, 5, 8),
+		new THREE.MeshLambertMaterial({ color: 0x343434})
+	);
+	cushionBtwn.position.set(-0.3, -5, 4.1);
+	couchBtwnGrp.add(cushionBtwn);
+
+	return couchBtwnGrp;
+}
+
+function createCouchLeft(){
+	const couchLeftGrp = new THREE.Group();
+	const couchBackLeft = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(8, 10, 4),
+		new THREE.MeshLambertMaterial({ color: 0x8C8C8C})
+	);
+	couchLeftGrp.add(couchBackLeft);
+	couchBackLeft.position.set(-8, 0, -0.2);
+
+	const couchLeft = createCouchSides();
+	couchLeft.position.set(-12, -2, 5);
+	couchLeftGrp.add(couchLeft);
+
+	const cushionLeft = createCushion();
+	cushionLeft.position.set(-7, -5, 4);
+	couchLeftGrp.add(cushionLeft);
+
+	return couchLeftGrp;
+};
+
+function createCouchRight(){
+	const couchRightGrp = new THREE.Group();
+
+	const couchBackRight = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(8, 10, 4),
+		new THREE.MeshLambertMaterial({ color: 0x8C8C8C})
+	);
+	couchRightGrp.add(couchBackRight);
+	couchBackRight.position.set(12, 0, -0.2);
+	
+	const cushionRight = createCushion();
+	cushionRight.position.set(10.2, -5, 4);
+	couchRightGrp.add(cushionRight);
+
+	const couchRight = createCouchSides();
+	couchRight.position.set(14.5, -2, 5);
+	couchRightGrp.add(couchRight);
+
+	return couchRightGrp;
+};
+
+function createCouch() {
+
+	const couch = new THREE.Group();
+
+	const couchLeft  = createCouchLeft();
+	couch.add(couchLeft);
+
+	const couchBtwn = createCouchBetween();
+	couchBtwn.position.set(2, 0, -0.2);
+	couch.add(couchBtwn);
+
+	const couchRight  = createCouchRight();
+	couch.add(couchRight);
+	
+	const couchBox = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(8, 5, 8),
+		new THREE.MeshLambertMaterial({ color: 0x8C8C8C})
+	);
+	couchBox.position.set(5,0,15);
+	couch.add(couchBox);
+
+	couch.position.set(-25, 0, 0);
+	return couch;
+}
+
+function createMat(){
+	const mat = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(20, 2, 25),
+		new THREE.MeshLambertMaterial({ color: 0xEEB462})
+	);
+
+	mat.position.set(-23, 0, 22);
+
+	return mat;
+}
+
+function createTV(){
+	const tv = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(15, 5, 0.6),
+		new THREE.MeshLambertMaterial({color:0x4A4A4A})
+	);
+	
+	tv.position.set(-25, 3, 47);
+	return tv;
+}
+
+function createTVtable(){
+	const tvTbl = new THREE.Group();
+
+	const table = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(20, 2, 8),
+		new THREE.MeshLambertMaterial({color:0xffffff})
+	);	
+	table.position.set(-26, -4, 46.6);
+	tvTbl.add(table);
+
+	const remote = new THREE.Mesh(
+		new THREE.BoxBufferGeometry(2, 1, 3),
+		new THREE.MeshLambertMaterial({color:0x4A4A4A})
+	)
+	remote.position.set(-21, -3, 45);
+	remote.rotation.y = 2;
+	tvTbl.add(remote);
+
+	return tvTbl;
+}
+
+function createTVarea(){
+	const tvArea = new THREE.Group();
+
+	const mat = createMat();
+	tvArea.add(mat); 
+
+	const tv = createTV();
+	tvArea.add(tv);
+
+	const tvTbl = createTVtable();
+	tvArea.add(tvTbl);
+
+	const couch = createCouch();
+	couch.position.y = 6;
+	tvArea.add(couch);
+
+	return tvArea;
+}
+
+const tvArea = createTVarea();
+scene.add(tvArea);
+
 renderer.render(scene, camera);
