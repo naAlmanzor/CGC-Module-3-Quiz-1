@@ -20,6 +20,9 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 
 document.body.appendChild( renderer.domElement );
 
+/*															DESIGNING																	*/ 
+
+/*														  Room Creation 																*/
 function createWall(){
 	
 	const wall = new THREE.Mesh( 
@@ -188,6 +191,10 @@ function createRoom(){
 const room = createRoom();
 scene.add(room); 
 
+
+/*													       TV Area Design																*/
+
+/* Couch */ 
 function createCouchSides(){
 	
 	const couchSide = new THREE.Mesh(
@@ -263,7 +270,7 @@ function createCouchRight(){
 	couchRightGrp.add(cushionRight);
 
 	const couchRight = createCouchSides();
-	couchRight.position.set(14.5, -5, 5);
+	couchRight.position.set(14.5, -5, 4.9);
 	couchRightGrp.add(couchRight);
 
 	return couchRightGrp;
@@ -288,6 +295,7 @@ function createCouch() {
 	return couch;
 }
 
+/* Mat */ 
 function createMat(){
 	const mat = new THREE.Mesh(
 		new THREE.BoxBufferGeometry(20, 2, 25),
@@ -299,6 +307,7 @@ function createMat(){
 	return mat;
 }
 
+/* TV Corner */ 
 function createTV(){
 	const tv = new THREE.Mesh(
 		new THREE.BoxBufferGeometry(15, 5, 0.6),
@@ -369,6 +378,10 @@ const tvArea = createTVarea();
 tvArea.position.set(-5, 0, -19)
 scene.add(tvArea);
 
+
+/*													       	  Table Area Design																*/
+
+/* Chairs */ 
 function createRoundChair(){
 	const roundChair = new THREE.Mesh(
 		new THREE.CylinderGeometry( 3, 3, 2, 64 ),
@@ -378,6 +391,7 @@ function createRoundChair(){
 	return roundChair;
 }
 
+/* Table Area */
 function createTblArea(){
 	const tblArea = new THREE.Group();
 
@@ -403,6 +417,9 @@ const tblArea = createTblArea();
 tblArea.position.set(0, 0, -21)
 scene.add(tblArea);
 
+/*													       		Miscellaneous 																*/
+
+/* Lamp */ 
 function createLampStand (){
 
 	const lampStand = new THREE.Group();
@@ -452,6 +469,7 @@ const lamp = createLamp();
 lamp.position.set(-12, 0, -21);
 scene.add(lamp);
 
+/* Plants */
 function createPlant(){
 
 	const plant = new THREE.Group();
@@ -480,6 +498,7 @@ const plant2 = createPlant();
 plant2.position.set(42, 0, -20);
 scene.add(plant2);
 
+/* Frame */
 function createframe(){
 	const frame = new THREE.Mesh(
 		new THREE.BoxBufferGeometry(0.2,3,3.4),
