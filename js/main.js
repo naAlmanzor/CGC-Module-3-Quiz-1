@@ -59,6 +59,9 @@ function createWindows(){
 		new THREE.BoxGeometry(12.5, 20.30, 0.2),  
 		new THREE.MeshLambertMaterial({color: 0xffffff, opacity: 0.5, transparent: true}) 
 	);
+
+	const light = new THREE.PointLight( 0xff0000, 5, 30 );
+	windowGrp.add(light);
 	windowGrp.add(wallWindow);
 
 	return windowGrp;
@@ -112,7 +115,7 @@ function createWallDetail(){
 
 	const detail = new THREE.Mesh(
 		new THREE.BoxBufferGeometry( 10, 20, 2),
-		new THREE.MeshLambertMaterial( {color: 0xD29C71} )
+		new THREE.MeshPhongMaterial( {color: 0xD29C71} )
 	)
 	details.add(detail);
 
@@ -323,7 +326,7 @@ function createGlassTbl(){
 
 	const glass = new THREE.Mesh(
 		new THREE.BoxBufferGeometry(15, 1, 8),
-		new THREE.MeshLambertMaterial({color:0xffffff, opacity: 0.8, transparent: true})
+		new THREE.MeshBasicMaterial({color:0xffffff, opacity: 0.8, transparent: true})
 	);
 	glassTbl.add(glass);
 
